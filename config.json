@@ -1,0 +1,17 @@
+{
+  "eventHub": {
+    "namespace": "testnsva",
+    "name": "testhub",
+    "dnsSuffix": "servicebus.windows.net",
+    "connectionStringName": "testEventHubConnectionString"
+  },
+  "storageAcct": {
+    "name": "testcheckpointva",
+    "containerName": "test-container",
+    "connectionStringName": "eventHubStorageContainer"
+  },
+  "keyVault": {
+    "name": "eventhubkvva",
+    "dnsSuffix": "vault.azure.net"
+  }
+}
