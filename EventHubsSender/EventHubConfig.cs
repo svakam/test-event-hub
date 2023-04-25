@@ -1,26 +1,33 @@
-﻿namespace EventHubsSender
+﻿using Newtonsoft.Json;
+
+namespace EventHubsSender
 {
     public class EventHubConfig
     {
+        public EventHub EventHubDetails { get; set; }
+        public StorageAcct StorageAcctDetails { get; set; }
+        public KeyVault KeyVaultDetails { get; set; }
+
         public class EventHub
         {
-            string Namespace { get; set; }
-            string Name { get; set; }
-            string DnsSuffix { get; set; }
-            string ConnectionStringName { get; set; }
-
+            public string Namespace { get; set; }
+            public string EventHubName { get; set; }
+            public string DnsSuffix { get; set; }
+            public string ConnectionStringName { get; set; }
         }
         public class StorageAcct
         {
-            string Name { get; set; }
-            string ContainerName { get; set; }
-            string ConnectionStringName { get; set; }
+            public string StorageAcctName { get; set; }
+            public string ContainerName { get; set; }
+            public string ConnectionStringName { get; set; }
         }
         public class KeyVault
         {
-            string Name { get; set; }
-            string DnsSuffix { get; set; }
+            public string VaultName { get; set; }
+            public string DnsSuffix { get; set; }
         }
     }
+
+    
 }
 
