@@ -11,6 +11,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 
 // https://learn.microsoft.com/en-us/dotnet/api/azure.messaging.eventhubs.producer.eventhubproducerclient.-ctor?view=azure-dotnet#azure-messaging-eventhubs-producer-eventhubproducerclient-ctor(system-string-system-string-azure-azurenamedkeycredential-azure-messaging-eventhubs-producer-eventhubproducerclientoptions) 
+// https://www.newtonsoft.com/json/help/html/DeserializeWithJsonSerializerFromFile.htm#!
 
 namespace EventHubsSender
 {
