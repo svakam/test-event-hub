@@ -20,15 +20,13 @@ namespace EventHubsSender
         CONNECTIONSTRING
     }
 
-    public class ProducerClient
+    public class CreateProducerClient
     {
-        private HttpClient HttpClient;
         private SecretClient SecretClient;
         private EventHubConfig EventHubConfig { get; set; }
-        public ProducerClient(string configPath)
+        public CreateProducerClient(string configPath)
         {
             // error handling
-            HttpClient = new HttpClient();
             EventHubConfig = LoadConfig(configPath);
             SecretClient = new SecretClient(new Uri($"https://{EventHubConfig.KeyVaultDetails.VaultName}.{EventHubConfig.KeyVaultDetails.DnsSuffix}"),
                 new DefaultAzureCredential(includeInteractiveCredentials: true));
@@ -47,10 +45,11 @@ namespace EventHubsSender
             if (authenticationMethod == AuthenticationMethod.PASSWORDLESS)
             {
                 string @namespace = EventHubConfig.EventHubDetails.Namespace,
-                dnsSuffix = EventHubConfig.KeyVaultDetails.DnsSuffix;
+                    dnsSuffix = EventHubConfig.KeyVaultDetails.DnsSuffix;
 
                 return new EventHubProducerClient($"{@namespace}.{dnsSuffix}", eventHubName, new DefaultAzureCredential(true));
-            } else
+            } 
+            else
             {
                 var connectionString = GetSecret(SecretClient, EventHubConfig.EventHubDetails.ConnectionStringName);
                 

@@ -6,12 +6,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 int numEvents = 7;
-string configPath = $"{Environment.CurrentDirectory}../config.json";
+string configPath = $"{Environment.CurrentDirectory}/config.json";
 
 // create producer client instance
-string configPath = 
-EventHubProducerClient producerClient = new();
-producerClient.GetProducerClient(eventHubNamespace, cloudEnvt, eventHubName, connectionString, CreateProducerClient.CONNECTIONSTRING);
+CreateProducerClient createProducerClient = new(configPath);
+EventHubProducerClient producerClient = createProducerClient.GetProducerClient(AuthenticationMethod.CONNECTIONSTRING);
 
 // create batch instance
 using EventDataBatch eventDataBatch = await producerClient.CreateBatchAsync();
