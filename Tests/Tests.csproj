@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EventHubsReceiver\EventHubsReceiver.csproj" />
+    <ProjectReference Include="..\EventHubsSender\EventHubsSender.csproj" />
   </ItemGroup>
 
 </Project>

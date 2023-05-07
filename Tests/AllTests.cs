@@ -1,4 +1,4 @@
-using EventHubsReceiver;
+
 using EventHubsSender;
 using System.Text;
 
@@ -10,13 +10,20 @@ namespace Tests
         [TestMethod]
         public void TestPath()
         {
-            string configPath = $"{Environment.CurrentDirectory}\\config.json";
+            string configPath = $"{Environment.CurrentDirectory}";
+            var directory = new DirectoryInfo(configPath);
+            while (directory != null && !directory.GetFiles("*.sln").Any())
+            {
+                Console.WriteLine(directory.FullName);
+                directory = directory.Parent;
+            }
+            configPath = directory.FullName + "\\config.json";
             string realPath = "C:\\Users\\vikra\\Development\\Repos\\GitHub\\test-event-hub-qs\\EventHubsQS\\config.json";
             Assert.IsTrue(configPath == realPath);
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestJSONRead()
         {
 
         }
