@@ -6,15 +6,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 int numEvents = 7;
-
-// ideally these are fetched as secrets in prod
-string eventHubNamespace = "testnsva";
-string cloudEnvt = "servicebus.windows.net";
-string eventHubName = "testhub";
+string configPath = $"{Environment.CurrentDirectory}/config.json";
 
 // create producer client instance
-EventHubProducerClient producerClient = new();
-producerClient.GetProducerClient(eventHubNamespace, cloudEnvt, eventHubName, connectionString, AuthenticationMethod.CONNECTIONSTRING);
+CreateProducerClient createProducerClient = new(configPath);
+EventHubProducerClient producerClient = createProducerClient.GetProducerClient(AuthenticationMethod.CONNECTIONSTRING);
 
 // create batch instance
 using EventDataBatch eventDataBatch = await producerClient.CreateBatchAsync();

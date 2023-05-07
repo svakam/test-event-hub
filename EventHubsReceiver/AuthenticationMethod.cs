@@ -17,11 +17,11 @@ namespace EventHubsReceiver
         CONNECTIONSTRING
     }
 
-    public class ProcessorClient
-    {
-        public static EventProcessorClient GetEventProcessorClient(string eventHubNamespace, string cloudEnvt, string eventHubName, string storageAccName, string containerName, string connectionString)
-        {
+    //public class ProcessorClient
+    //{
+    //    public static EventProcessorClient GetEventProcessorClient(string eventHubNamespace, string cloudEnvt, string eventHubName, string storageAccName, string containerName, string connectionString)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }

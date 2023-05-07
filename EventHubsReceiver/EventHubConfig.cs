@@ -2,24 +2,27 @@
 {
     public class EventHubConfig
     {
-        public class EventHub
-        {
-            string Namespace { get; set; }
-            string Name { get; set; }
-            string DnsSuffix { get; set; }
-            string ConnectionStringName { get; set; }
+        public EventHubDetails EventHub { get; set; }
+        public StorageAcctDetails StorageAcct { get; set; }
+        public KeyVaultDetails KeyVault { get; set; }
 
-        }
-        public class StorageAcct
+        public class EventHubDetails
         {
-            string Name { get; set; }
-            string ContainerName { get; set; }
-            string ConnectionStringName { get; set; }
+            public string Namespace { get; set; }
+            public string EventHubName { get; set; }
+            public string DnsSuffix { get; set; }
+            public string ConnectionStringName { get; set; }
         }
-        public class KeyVault
+        public class StorageAcctDetails
         {
-            string Name { get; set; }
-            string DnsSuffix { get; set; }
+            public string StorageAcctName { get; set; }
+            public string ContainerName { get; set; }
+            public string ConnectionStringName { get; set; }
+        }
+        public class KeyVaultDetails
+        {
+            public string VaultName { get; set; }
+            public string DnsSuffix { get; set; }
         }
     }
 }

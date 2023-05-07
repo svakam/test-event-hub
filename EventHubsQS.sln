@@ -8,9 +8,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventHubsReceiver", "EventHubsReceiver\EventHubsReceiver.csproj", "{A5E2B66D-C8D7-4CF2-BC09-0C98FE8CFBC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventHubsQS", "EventHubsQS", "{9276DEC1-7EEF-47B5-86AD-136B7D89BA8D}"
-	ProjectSection(SolutionItems) = preProject
-		config.json = config.json
-	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{BBF7829E-F7D6-42E9-8CB8-6E8570821678}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +25,10 @@ Global
 		{A5E2B66D-C8D7-4CF2-BC09-0C98FE8CFBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5E2B66D-C8D7-4CF2-BC09-0C98FE8CFBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5E2B66D-C8D7-4CF2-BC09-0C98FE8CFBC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF7829E-F7D6-42E9-8CB8-6E8570821678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF7829E-F7D6-42E9-8CB8-6E8570821678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF7829E-F7D6-42E9-8CB8-6E8570821678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF7829E-F7D6-42E9-8CB8-6E8570821678}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
