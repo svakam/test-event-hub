@@ -10,15 +10,18 @@ namespace Tests
         [TestMethod]
         public void TestPath()
         {
+            // https://stackoverflow.com/questions/19001423/getting-path-to-the-parent-folder-of-the-solution-file-using-c-sharp
             string configPath = $"{Environment.CurrentDirectory}";
             var directory = new DirectoryInfo(configPath);
+            Console.WriteLine(directory.FullName);
             while (directory != null && !directory.GetFiles("*.sln").Any())
             {
                 Console.WriteLine(directory.FullName);
                 directory = directory.Parent;
             }
-            configPath = directory.FullName + "\\config.json";
-            string realPath = "C:\\Users\\vikra\\Development\\Repos\\GitHub\\test-event-hub-qs\\EventHubsQS\\config.json";
+            Console.WriteLine(directory.FullName);
+            configPath = directory.FullName + "\\eventHubsDetails.json";
+            string realPath = "C:\\Users\\vikra\\Development\\Repos\\GitHub\\test-event-hub-qs\\EventHubsQS\\eventHubsDetails.json";
             Assert.IsTrue(configPath == realPath);
         }
 
