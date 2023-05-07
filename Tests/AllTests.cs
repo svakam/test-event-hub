@@ -2,12 +2,15 @@
 using EventHubsSender;
 using Newtonsoft.Json;
 using System.Text;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
 
 namespace Tests
 {
     [TestClass]
     public class TestLoadConfig
     {
+        EventHubConfig deserialized;
         [TestMethod]
         public void TestPath()
         {
@@ -32,7 +35,7 @@ namespace Tests
             string currConfig = "C:\\Users\\vikra\\Development\\Repos\\GitHub\\test-event-hub-qs\\EventHubsQS\\eventHubsDetails.json";
             // test each obj in deserialized
             string readJson = File.ReadAllText(currConfig);
-            EventHubConfig deserialized = JsonConvert.DeserializeObject<EventHubConfig>(readJson);
+            deserialized = JsonConvert.DeserializeObject<EventHubConfig>(readJson);
             Console.WriteLine(readJson);
             Assert.IsNotNull(deserialized);
             Assert.IsNotNull(deserialized.EventHub);
@@ -48,7 +51,14 @@ namespace Tests
         [TestMethod]
         public void GetSecret()
         {
-
+            string realPath = "C:\\Users\\vikra\\Development\\Repos\\GitHub\\test-event-hub-qs\\EventHubsQS\\eventHubsDetails.json";
+            EventHubConfig deserialized = JsonConvert.DeserializeObject<EventHubConfig>(File.ReadAllText(realPath));
+            SecretClient sc = new(new Uri($"https://{deserialized.KeyVault.VaultName}.{deserialized.KeyVault.DnsSuffix}"),
+                new DefaultAzureCredential(includeInteractiveCredentials: true));
+            Assert.IsNotNull(sc);
+            Assert.IsTrue(sc.VaultUri.ToString() == "https://eventhubkvva.vault.azure.net/");
+            var response = sc.GetSecret(deserialized.EventHub.ConnectionStringName).Value;
+            Assert.IsNotNull(response);
         }
     }
 }

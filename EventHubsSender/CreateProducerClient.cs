@@ -52,11 +52,12 @@ namespace EventHubsSender
             } 
             else
             {
-                var connectionString = GetSecret(SecretClient, EventHubConfig.EventHub.ConnectionStringName);
+                var responseObj = GetSecretObjResponse(SecretClient, EventHubConfig.EventHub.ConnectionStringName);
                 
                 try
                 {
-                    return new EventHubProducerClient(connectionString.Value, eventHubName);
+                    KeyVaultSecret secretObj = responseObj.Value;
+                    return new EventHubProducerClient(secretObj.Value, eventHubName);
                 }
                 catch (Exception e)
                 {
@@ -67,7 +68,7 @@ namespace EventHubsSender
             }
         }
 
-        private KeyVaultSecret? GetSecret(SecretClient secretClient, string connectionStringName)
+        private Response<KeyVaultSecret> GetSecretObjResponse(SecretClient secretClient, string connectionStringName)
         {
             return secretClient.GetSecret(connectionStringName);
         }
