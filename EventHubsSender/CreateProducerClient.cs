@@ -33,6 +33,18 @@ namespace EventHubsSender
                 new DefaultAzureCredential(includeInteractiveCredentials: true));
         }
 
+        public static string GetConfigPath(string currDir)
+        {
+            var directory = new DirectoryInfo(currDir);
+            while (directory != null && !directory.GetFiles("*sln").Any())
+            {
+                directory = directory.Parent;
+            }
+            string configPath = directory.FullName + "\\eventHubsDetails.json";
+            Console.WriteLine($"config path: {configPath}");
+            return configPath;
+        }
+
         private EventHubConfig LoadConfig(string configPath)
         {
             Console.WriteLine($"config path: {configPath}");

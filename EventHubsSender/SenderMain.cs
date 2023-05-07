@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 int numEvents = 7;
-string configPath = $"{Environment.CurrentDirectory}/config.json";
+string configPath = CreateProducerClient.GetConfigPath(Environment.CurrentDirectory);
 
 // create producer client instance
 CreateProducerClient createProducerClient = new(configPath);
@@ -35,3 +35,4 @@ finally
     // ensure resources associated with client, and client are removed and closed
     await producerClient.DisposeAsync();
 }
+
