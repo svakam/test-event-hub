@@ -64,7 +64,6 @@ namespace EventHubsSender
                     Console.WriteLine("ERROR: could not fetch event hub secret: " + e);
                     return null;
                 }
-            
             }
         }
 
