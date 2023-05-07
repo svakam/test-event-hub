@@ -1,5 +1,6 @@
 
 using EventHubsSender;
+using Newtonsoft.Json;
 using System.Text;
 
 namespace Tests
@@ -28,7 +29,16 @@ namespace Tests
         [TestMethod]
         public void TestJSONRead()
         {
-
+            string currConfig = "C:\\Users\\vikra\\Development\\Repos\\GitHub\\test-event-hub-qs\\EventHubsQS\\eventHubsDetails.json";
+            // test each obj in deserialized
+            string readJson = File.ReadAllText(currConfig);
+            EventHubConfig deserialized = JsonConvert.DeserializeObject<EventHubConfig>(readJson);
+            Console.WriteLine(readJson);
+            Assert.IsNotNull(deserialized);
+            Assert.IsNotNull(deserialized.EventHub);
+            Assert.IsTrue(deserialized.EventHub.Namespace == "testnsva");
+            Assert.IsTrue(deserialized.StorageAcct.StorageAcctName == "testcheckpointva");
+            Assert.IsTrue(deserialized.KeyVault.VaultName == "eventhubkvva");
         }
     }
 

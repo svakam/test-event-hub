@@ -24,12 +24,12 @@ namespace EventHubsSender
     public class CreateProducerClient
     {
         private SecretClient SecretClient;
-        private EventHubConfig EventHubConfig { get; set; }
+        internal EventHubConfig EventHubConfig { get; set; }
         public CreateProducerClient(string configPath)
         {
             // error handling
             EventHubConfig = LoadConfig(configPath);
-            SecretClient = new SecretClient(new Uri($"https://{EventHubConfig.KeyVaultDetails.VaultName}.{EventHubConfig.KeyVaultDetails.DnsSuffix}"),
+            SecretClient = new SecretClient(new Uri($"https://{EventHubConfig.KeyVault.VaultName}.{EventHubConfig.KeyVault.DnsSuffix}"),
                 new DefaultAzureCredential(includeInteractiveCredentials: true));
         }
 
@@ -41,18 +41,18 @@ namespace EventHubsSender
 
         public EventHubProducerClient GetProducerClient(AuthenticationMethod authenticationMethod)
         {
-            string eventHubName = EventHubConfig.EventHubDetails.EventHubName;
+            string eventHubName = EventHubConfig.EventHub.EventHubName;
 
             if (authenticationMethod == AuthenticationMethod.PASSWORDLESS)
             {
-                string @namespace = EventHubConfig.EventHubDetails.Namespace,
-                    dnsSuffix = EventHubConfig.KeyVaultDetails.DnsSuffix;
+                string @namespace = EventHubConfig.EventHub.Namespace,
+                    dnsSuffix = EventHubConfig.KeyVault.DnsSuffix;
 
                 return new EventHubProducerClient($"{@namespace}.{dnsSuffix}", eventHubName, new DefaultAzureCredential(true));
             } 
             else
             {
-                var connectionString = GetSecret(SecretClient, EventHubConfig.EventHubDetails.ConnectionStringName);
+                var connectionString = GetSecret(SecretClient, EventHubConfig.EventHub.ConnectionStringName);
                 
                 try
                 {
